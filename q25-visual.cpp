@@ -1,7 +1,8 @@
 #include<iostream>
 #include<stdlib.h>
 #include<Windows.h>
-#include<graphics.h>
+#include<iomanip>
+#include<time.h>
 
 using namespace std;
 void display(int a[],int);
@@ -9,11 +10,14 @@ void display(int a[],int);
 int main()
 {
 	int n;
-	cin>>n;
 	
+	cout<<"::Selection Sort Visualiser::"<<endl;
+	srand(time(NULL));
+	cout<<"Enter the number of elements"<<endl;
+	cin>>n;
 	int a[n];
 	
-	cout<<"enter the elements"<<endl;
+	cout<<"Generating random numbers::"<<endl;
 	for(int i=0;i<n;i++)
 	a[i]=(rand()%(n));
 	
@@ -24,14 +28,16 @@ int main()
 	for(int i=n-1;i>0;i--)
 	{
 		max=i;
-		for(int j=0;j<i-1;j++)
+		for(int j=0;j<i;j++)
 		if(a[j]>a[max])
 		max=j;
 		
-		temp=a[i];
-		a[i]=a[max];
-		a[max]=temp;
-		
+		if(max!=i)
+		{
+		  temp=a[i];
+		  a[i]=a[max];
+		  a[max]=temp;
+	    }
 		
 		display(a,n);
 		cout<<"Pass "<<i+1<<endl;
@@ -48,7 +54,7 @@ void display(int a[],int n)
 	for(int i=0;i<n;i++)
 	{
 	    last=a[i];
-	    cout<<"Data "<<i+1;
+	    cout<<"Data "<<setw(2)<<setfill(' ')<<i+1;
 		for(int j=1;j<=last;j++)
 		    cout<<"|";	
 	    cout<<endl;	
